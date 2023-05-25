@@ -1,0 +1,89 @@
+<%- include ('partials/header.ejs'); -%>    
+    
+    <div class="table-wrapper status" id="none">   
+        
+        <center>            
+            
+            <img src="assets/img/klalAmazon.jpeg" style="width:3840px;height:2160px;" >
+            
+        </center>
+        
+    </div>
+
+    <div class="table-wrapper status" id="_ABEF0000">   
+       
+        <center>
+            <h1 style="color:rgb(12, 12, 146)">Scanner detected</h1>
+            <hr width="80%" color="gren" />
+            <img src="assets/img/scanner.jpeg" style="width:3840px;height:2160px;" >
+            
+        </center>
+        
+    </div>
+  
+
+    <div class="table-wrapper status" id="_E2003412">   
+       
+        <center>
+            <h1 style="color:rgb(12, 12, 146)">Radio detected</h1>
+            <hr width="80%" color="gren" />            
+            <img src="assets/img/radioMotorola.jpg" style="width:3840px;height:2160px;" >
+        </center>
+        
+    </div>
+
+    <div class="table-wrapper status" id="_E2801191">   
+       
+        <center>
+            <h1 style="color:rgb(12, 12, 146)">Laptop detected</h1>
+            <hr width="80%" color="gren" />            
+            <img src="assets/img/elitebook.jpg" style="width:3840px;height:2160px;" >
+        </center>
+        
+    </div>
+
+    <style>
+        .status {
+            display: none;
+          }
+          
+        .status.active {
+            display: block;
+        }
+    </style>
+
+    <script>
+        const endpoint = '/api/getlastread';
+        function executeQuery() {
+            fetch(endpoint)
+            .then(resp => resp.json())
+            .then(resp => {
+                validateData(resp)
+            })
+        }
+
+        function validateData(response) {
+            document.querySelectorAll('.status').forEach(elm => {
+                elm.classList.remove('active')
+            })
+            if (response.lastScannerCode) {
+                const howManyMillisecondsPassed = response.currentDate - response.lastScannerDate
+                if (howManyMillisecondsPassed < 15000) {
+                const typeId = response.lastScannerCode.substring(0, 8)
+                const typeDiv = document.querySelector('#_'+typeId)
+                if (typeDiv) {
+                    typeDiv.classList.add('active')
+                }
+                } else document.querySelector('#none').classList.add('active')
+            } else document.querySelector('#none').classList.add('active')
+        }
+
+        setInterval(() => {
+            executeQuery()
+        }, 5000)
+    </script>    
+
+    
+</div>
+</body>
+</html>

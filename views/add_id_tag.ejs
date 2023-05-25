@@ -1,0 +1,34 @@
+<%- include ('partials/header.ejs'); -%>
+    <div class="container">
+        <p class="text-center text-danger">Add new Id Tag</p>
+        <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="id_epc" id="id-epc" placeholder="ID EPC" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="asset_tag" id="asset-tag" placeholder="Asset Tag" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="description" id="description" placeholder="Description" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="model" id="model" placeholder="Model" required>
+                </div>                
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <select id="image" name="image" class="form-control" required>
+                        <option selected disabled>Choose Image</option>
+                        <option></option>
+                        <option>radioMotorola.jpg</option>
+                        <option>mc3300.jpg</option>                       
+                    </select>
+                </div>                
+            </div>
+            <button type="submit" class="btn btn-primary float-right">Add New ID Tag</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
